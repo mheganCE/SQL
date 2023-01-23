@@ -1,0 +1,36 @@
+-- create a Apparel store database
+
+CREATE TABLE Apparel (id INTEGER PRIMARY KEY, items TEXT, model TEXT, colour TEXT, size TEXT, quantity INTEGER, price_USD INTEGER, quantity_sold INTEGER);
+
+INSERT INTO Apparel VALUES (1, "Polo Shirts", "Polo001", "Red", "Small", 10, 25, 0);
+INSERT INTO Apparel VALUES (2, "Polo Shirts", "Polo001", "Red", "Medium", 5, 25, 5);
+INSERT INTO Apparel VALUES (3, "Polo Shirts", "Polo002", "White/Red", "Large", 10, 25, 0);
+INSERT INTO Apparel VALUES (4, "Polo Shirts", "Polo002", "Magenta", "Extra Large", 2, 25, 0);
+INSERT INTO Apparel VALUES (5, "Shirts", "Shirts001", "Purple", "Small", 10, 20, 0);
+INSERT INTO Apparel VALUES (6, "Shirts", "Shirts001", "White", "Medium", 15, 20, 0);
+INSERT INTO Apparel VALUES (7, "Shorts", "Shorts001", "Pink", "Small", 5, 15, 5);
+INSERT INTO Apparel VALUES (8, "Shorts", "Shorts002", "Black", "Medium", 5, 20, 0);
+INSERT INTO Apparel VALUES (9, "Skirts", "Skirts001", "Pink", "Small", 5, 15, 0);
+INSERT INTO Apparel VALUES (10, "Skirts", "Skirts001", "Pink", "Medium", 10, 15, 0);
+INSERT INTO Apparel VALUES (11, "Jackets", "Jackets001", "Pink", "Small", 8, 50, 0);
+INSERT INTO Apparel VALUES (12, "Jackets", "Jackets002", "Blue", "Large", 2, 50, 0);
+INSERT INTO Apparel VALUES (13, "Trackpants", "Trackpants001", "Black", "Small", 5, 55, 5);
+INSERT INTO Apparel VALUES (14, "Shorts", "Trackpants001", "Black", "Medium", 7, 55, 0);
+INSERT INTO Apparel VALUES (15, "Trackpants", "Trackpants002", "Black", "Maroon", 3, 55, 0);
+
+-- Display the database
+
+SELECT * FROM Apparel;
+
+-- display the total quantiy sold
+
+SELECT SUM(quantity_sold) FROM Apparel; 
+
+-- display the database and ordered by price_USD
+
+SELECT * FROM Apparel ORDER BY price_USD;
+
+-- display the items sold and its quantity 
+
+SELECT * FROM Apparel WHERE quantity_sold > 0 ORDER BY price_USD;
+
