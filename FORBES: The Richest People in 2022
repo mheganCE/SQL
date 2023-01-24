@@ -1,0 +1,216 @@
+/* The Richest People In The World 2022
+Data Source: https://www.forbes.com/billionaires/
+*/
+
+
+CREATE TABLE The_Richest_People_In_The_World 
+
+(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  Name TEXT, 
+  Net_Worth INTEGER, 
+  Gender TEXT, 
+  Age TEXT, 
+  Country TEXT, 
+  Source TEXT, 
+  Industry TEXT);
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Elon Musk", 219000000000, "Male", 50, "United States", "Tesla, SpaceX", "Automotive");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Jeff Bezos", 171000000000, "Male", 58, "United States", "Amazon", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Bernard Arnault & family", 158000000000, "Male", 73, "France", "LVMH", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Bill Gates", 129000000000, "Male", 66, "United States", "Microsoft", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Warren Buffett", 118000000000, "Male", 91, "United States", "Berkshire Hathaway", "Finance & Investments");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Larry Page", 111000000000, "Male", 49, "United States", "Google", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Sergey Brin", 107000000000, "Male", 48, "United States", "Google", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Larry Ellison", 106000000000, "Male", 77, "United States", "software", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Steve Ballmer", 91400000000, "Male", 66, "United States", "Microsoft", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Mukesh Ambani", 90700000000, "Male", 64, "India", "Diversified", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Gautam Adani", 90000000000, "Male", 59, "India", "infrastructure, commodities", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Michael Bloomberg", 82000000000, "Male", 80, "United States", "Bloomberg LP", "Media & Entertainment");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Carlos Slim Helu & family", 81200000000, "Male", 82, "Mexico", "telecom", "Telecom");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Francoise Bettencourt Meyers & family", 74800000000, "Female", 68, "France", "L'Oréal", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Mark Zuckerberg", 67300000000, "Male", 37, "United States", "Facebook", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Jim Walton", 66200000000, "Male", 73, "United States", "Walmart", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Zhong Shanshan", 65700000000, "Male", 67, "China", "beverages, pharmaceuticals", "Food & Beverage");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Alice Walton", 65300000000, "Female", 72, "United States", "Walmart", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Rob Walton", 65000000000, "Male", 77, "United States", "Walmart", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Changpeng Zhao", 65000000000, "Male", 44, "Canada", "cryptocurrency exchange", "Finance & Investments");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Charles Koch", 60000000000, "Male", 86, "United States", "Koch Industries", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Julia Koch & family", 60000000000, "Female", 59, "United States", "Koch Industries", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Amancio Ortega", 59600000000, "Male", 86, "Spain", "Zara", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Michael Dell", 55100000000, "Male", 57, "
+United States", "Dell computers", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Zhang Yiming", 50000000000, "Male", 38, "China", "TikTok", "Media & Entertainment");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("David Thomson & family", 49200000000, "Male", 64, "Canada", "media", "Media & Entertainment");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Phil Knight & family", 47300000000, "Male", 84, "United States", "Nike", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Dieter Schwarz", 47100000000, "Male", 82, "Germany", "retail", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Robin Zeng", 44800000000, "Male", 53, "Hong Kong", "batteries", "Automotive");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("MacKenzie Scott", 43600000000, "Female", 51, "
+United States", "Amazon", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Rodolphe Saadé & family", 41400000000, "Male", 52, "France", "shipping", "Logistics");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("François Pinault & family", 40400000000, "Male", 85, "France", "luxury goods", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Klaus-Michael Kuehne", 37300000000, "Male", 85, "Germany", " shipping", "Logistics");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Ma Huateng", 37200000000, "Male", 50, "China", "internet media", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Beate Heister & Karl Albrecht Jr. & family", 36800000000, "N/A", "N/A", "Germany", "Supermarkets", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Giovanni Ferrero", 36200000000, "Male", 57, "Italy", "Nutella, chocolates", "Food & Beverage");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Li Ka-shing", 34800000000, "Male", 93, "Hong Kong", "diversified", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Stephen Schwarzman", 34800000000, "Male", 75, "United States", "investments", "Finance & Investments");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Lee Shau Kee", 32600000000, "Male", 94, "Hong Kong", "real estate", "Real Estate");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Len Blavatnik", 32500000000, "Male", 64, "United States", " music, chemicals", "Diversified");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Jacqueline Mars", 31700000000, "Male", 82, "United States", "candy, pet food", "Food & Beverage");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("John Mars", 31700000000, "Male", 86, "United States", "candy, pet food", "Food & Beverage");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Alain Wertheimer", 31200000000, "Male", 73, "France", "Chanel", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Gerard Wertheimer", 31200000000, "Male", 71, "France", "Chanel", "Fashion & Retail");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("German Larrea Mota Velasco & family", 30800000000, "Male", 68,  "Mexico", "mining", "Metals & Mining");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Gina Rinehart", 30200000000, "Male", 68, "Australia", "mining", "Metals & Mining");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Shiv Nadar", 28700000000, "Male", 76, "India", "software services", "Technology");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Jim Simons", 28600000000, "Male", 83, "United States", "hedge funds", "Finance & Investments");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("He Xiangjian", 28300000000, "Male", 79,  "China", " home appliances", "Manufacturing");
+
+INSERT INTO The_Richest_People_In_The_World (Name, Net_Worth, Gender, Age, Country, Source, Industry) 
+VALUES ("Miriam Adelson & family", 27500000000, "Female", 76, "United States", "casinos", "Gambling & Casinos");
+
+
+--display FORBES 2022 top 50 richest people in the world
+SELECT * FROM The_Richest_People_In_The_World;
+
+--display the highest Net_Worth
+SELECT Name, MAX(Net_Worth) FROM The_Richest_People_In_The_World;
+
+--display the lowest Net_Worth
+SELECT Name, MIN(Net_Worth) FROM The_Richest_People_In_The_World;
+
+--how many male and female?
+SELECT Gender, Count(Gender) FROM The_Richest_People_In_The_World GROUP BY Gender;
+
+--shows all Female billionaires information
+SELECT * FROM The_Richest_People_In_The_World WHERE Gender="Female";
+
+--how many are engaged in certain industry
+SELECT Industry, Count(Industry) As "No. of Industry" FROM The_Richest_People_In_The_World GROUP BY Industry ORDER BY "No. of Industry";
+
+--top industries in the list
+SELECT Industry, Count(Industry) As "No. of Industry" FROM The_Richest_People_In_The_World GROUP BY Industry HAVING "No. of Industry" >5 ORDER BY "No. of Industry";
+
+--shows the age categories of the billinaires
+SELECT Name, Net_Worth, Industry,Age,
+    CASE
+        WHEN Age BETWEEN 18 AND 65 THEN "Adults (18 years or older)"
+        WHEN Age >= 65 THEN "Older adults (65 and older)"
+        ELSE "Youth"
+    END as "Age Categories"
+FROM The_Richest_People_In_The_World;
+
+--shows how many billionaires falls in each Age Categories
+SELECT Count(*),
+    CASE
+        WHEN Age BETWEEN 18 AND 65 THEN "Adults (18 years or older)"
+        WHEN Age >= 65 THEN "Older adults (65 and older)"
+        ELSE "Youth"
+    END as "Age Categories"
+FROM The_Richest_People_In_The_World GROUP BY "Age Categories";
+
+--shows billionaires' names that are age below 50, under Technology industry and in United States 
+SELECT * FROM The_Richest_People_In_The_World WHERE Age < 50 AND Industry="Technology" AND Country="United States";
+
+--female billionaires showing Net_Worth of more than 50billion
+SELECT * FROM The_Richest_People_In_The_World WHERE Net_Worth> 50000000000 AND Gender="Female";
+
+--showing Fashion & Retail Industry or particulary Nike 
+SELECT * FROM The_Richest_People_In_The_World WHERE Source="Nike" OR Industry="Fashion & Retail";
