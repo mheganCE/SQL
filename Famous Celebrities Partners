@@ -1,5 +1,3 @@
-/* Create table about the people and what they do here */
-
 CREATE table FamousPeople (
    id INTEGER PRIMARY KEY AUTOINCREMENT, 
    fullname TEXT, 
