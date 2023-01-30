@@ -1,0 +1,60 @@
+/* Create table about the people and what they do here */
+
+CREATE table FamousPeople (
+   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+   fullname TEXT, 
+   gender TEXT,
+   age INTEGER);
+
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Kit Harington", "Male", 36);
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Rose Leslie", "Female", 35);
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Blake Shelton", "Male", 46);
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Gwen Stefani", "Female", 53);
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Ben Affleck", "Male", 50);
+INSERT INTO FamousPeople (fullname, gender, age) VALUES ("Jennifer Lopez", "Female", 53);
+
+
+CREATE table Artists (
+   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+   artist_id INTEGER, 
+   name TEXT, 
+   project TEXT);
+
+INSERT INTO Artists (artist_id, name, project) VALUES (4, "Singer", "The Voice");
+INSERT INTO Artists (artist_id, name, project) VALUES (3, "Singer", "The Voice");
+INSERT INTO Artists (artist_id, name, project) VALUES (2, "Actress", "Game of Thrones");
+INSERT INTO Artists (artist_id, name, project) VALUES (2, "Actress", "The Last Witch Hunter");
+INSERT INTO Artists (artist_id, name, project) VALUES (1, "Actor", "Game of Thrones");
+INSERT INTO Artists (artist_id, name, project) VALUES (1, "Actor", "Eternals");
+INSERT INTO Artists (artist_id, name, project) VALUES (1, "Actor", "Gunpowder");
+INSERT INTO Artists (artist_id, name, project) VALUES (5, "Actor", "Gigli");
+INSERT INTO Artists (artist_id, name, project) VALUES (5, "Actor", "Gone Girl");
+INSERT INTO Artists (artist_id, name, project) VALUES (5, "Actor", "Armageddon");
+INSERT INTO Artists (artist_id, name, project) VALUES (6, "Actress/Singer", "Gigli");
+INSERT INTO Artists (artist_id, name, project) VALUES (6, "Actress/Singer", "Maid in Manhattan");
+INSERT INTO Artists (artist_id, name, project) VALUES (6, "Actress/Singer", "Anaconda");
+
+CREATE table Partners (
+   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+   artist_id1 INTEGER, 
+   artist_id2 INTEGER);
+
+INSERT INTO Partners (artist_id1, artist_id2) VALUES (1, 2);
+INSERT INTO Partners (artist_id1, artist_id2) VALUES (3, 4);
+INSERT INTO Partners (artist_id1, artist_id2) VALUES (5, 6);
+
+--- displays artists' names and their projects/movies
+SELECT FamousPeople.fullname, Artists.project 
+    FROM FamousPeople
+    LEFT OUTER JOIN Artists
+    ON FamousPeople.id = Artists.artist_id;
+    
+--- displays artists' ids with their partners' ids
+SELECT * FROM Partners;
+
+--- displays artists's name and their partners' name
+SELECT Partner1.fullname,Partner2.fullname FROM Partners
+    JOIN FamousPeople Partner1
+    ON Partners.artist_id1 = Partner1.id 
+    JOIN FamousPeople Partner2
+    ON Partners.artist_id2 = Partner2.id;
