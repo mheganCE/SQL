@@ -1,0 +1,39 @@
+/* Netflix Data Analytics Project */
+
+--- displays the title, director, and type of all Netflix shows from a combined two tables
+SELECT ntitles.show_id, 
+    ntitles.title,   
+    npeople.director,
+    ntitles.type
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" ntitles 
+LEFT OUTER JOIN "CharlotteChaze/BreakIntoTech"."netflix_people" npeople
+ON npeople.show_id = ntitles.show_id;
+
+/* In this query also answers the following questions */
+
+---	How many movie titles are there in the database? (movies only, not tv shows) 
+SELECT COUNT(*)
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie';
+
+---	When was the most recent batch of tv shows and/or movies added to the database?
+SELECT MAX(date(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+--- List all the movies and tv shows in alphabetical order. 
+SELECT title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" 
+ORDER BY title asc;
+
+--- Who was the Director for the movie Bright Star? 
+SELECT director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" npeople
+LEFT OUTER JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" ntitles
+ON npeople.show_id = ntitles.show_id
+WHERE title = 'Bright Star';
+
+--- What is the oldest movie in the database and what year was it made?
+SELECT title, release_year
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie' 
+ORDER BY release_year desc LIMIT 1;
