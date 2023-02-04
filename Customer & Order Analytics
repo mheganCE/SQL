@@ -2,7 +2,7 @@
 
 -- displays JanSales filtered out the blank and incorrect order ID
 SELECT * 
-FROM JanSales 
+FROM BIT_DB.JanSales 
 WHERE orderID <> "Order ID"
 
 -- 1. How many orders were placed in January?
