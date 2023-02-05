@@ -1,0 +1,108 @@
+/* In this SQL, I downloaded a dataset called Chinook. It's a digital media store which contains multiple tables (11) like albums, artists, 
+customers,employees, etc.
+/* I have looked and examined the given tables and came up some questions and gave answers that will be interesting and useful to users.
+
+--- 1.	Show Customers FirstName, LastName by Country
+SELECT CustomerID, FirstName, LastName, Country
+FROM chinook.customers
+ORDER BY country asc
+
+--- 2.	How many customers per country?
+SELECT Country, Count(Country)
+FROM chinook.customers
+GROUP BY country
+ORDER BY country asc
+
+--- 3.	Total Sales for 2009
+SELECT SUM(Total)
+FROM chinook.invoices
+WHERE InvoiceDate BETWEEN "2009-01-01 00:00:00" and "2009-12-31 00:00:00"
+
+--- 4.	Sales Support Agent's first and last names
+SELECT LastName, FirstName
+FROM chinook.employees
+WHERE Title="Sales Support Agent"
+
+--- 5.	Top 10 customers based on total invoice in 2009
+SELECT Cust.CustomerID, Cust.FirstName, Cust.LastName, 
+       Cust.Country, SUM(Inv.Total) as Total_Invoice
+FROM chinook.customers Cust
+LEFT JOIN chinook.invoices Inv
+ON Cust.CustomerID=Inv.CustomerID
+WHERE InvoiceDate BETWEEN "2009-01-01 00:00:00" and "2009-12-31 00:00:00"
+GROUP BY Cust.CustomerID
+ORDER BY Total_Invoice desc LIMIT 10
+
+--- 6.	Top Sales Support Agent in 2009
+SELECT  Emp.FirstName, Emp.LastName, SUM(Inv.Total) as Total_Invoice
+FROM chinook.employees Emp
+LEFT JOIN chinook.customers Cust
+ON Emp.EmployeeId=Cust.SupportRepId
+LEFT JOIN chinook.invoices Inv
+ON Cust.CustomerID=Inv.CustomerID
+WHERE Emp.Title="Sales Support Agent" 
+AND InvoiceDate BETWEEN "2009-01-01 00:00:00" and "2009-12-31 00:00:00"
+GROUP BY Emp.FirstName, Emp.LastName
+ORDER BY Total_Invoice desc
+
+--- 7.	Total Sales from 2009 to 2013
+SELECT SUM(Total)
+FROM chinook.invoices
+
+--- 8.	Top 10 customers based on their combined invoices from 2009 to 2013
+SELECT Cust.CustomerID, Cust.FirstName, Cust.LastName, 
+       Cust.Country, SUM(Inv.Total) as Total_Invoice
+FROM chinook.customers Cust
+LEFT JOIN chinook.invoices Inv
+ON Cust.CustomerID=Inv.CustomerID
+GROUP BY Cust.CustomerID
+ORDER BY Total_Invoice desc LIMIT 10
+
+--- 9.	Highest performance Sales Support Agent (first and last names) based on total invoice
+SELECT  Emp.FirstName, Emp.LastName, SUM(Inv.Total) as Total_Invoice
+FROM chinook.employees Emp
+LEFT JOIN chinook.customers Cust
+ON Emp.EmployeeId=Cust.SupportRepId
+LEFT JOIN chinook.invoices Inv
+ON Cust.CustomerID=Inv.CustomerID
+WHERE Emp.Title="Sales Support Agent" 
+GROUP BY Emp.FirstName, Emp.LastName
+ORDER BY Total_Invoice desc
+
+--- 10.	Shows Artist’s Id, Name, Title, Genre and unit price
+SELECT Artists.ArtistId, Artists.Name, Albums.Title, 
+       Genres.Name as Genre, Tracks.UnitPrice
+FROM chinook.Artists
+LEFT JOIN chinook.Albums
+ON Artists.ArtistId=Albums.ArtistId
+LEFT JOIN chinook.tracks
+ON Albums.AlbumId=Tracks.AlbumId
+LEFT JOIN chinook.Genres
+ON Genres.GenreID=Tracks.GenreID
+GROUP BY Albums.Title
+ORDER BY Tracks.UnitPrice desc
+
+--- 11.	Shows the customer’s full name and total amount under InvoiceId 194
+SELECT Cust.FirstName, Cust.LastName,
+       SUM(Items.UnitPrice*Items.Quantity) as Total
+FROM chinook.invoice_items Items
+LEFT JOIN chinook.invoices Inv
+ON Inv.InvoiceId= Items.InvoiceId
+LEFT JOIN chinook.customers Cust
+ON Inv.CustomerId=Cust.CustomerId
+WHERE Items.InvoiceId=194
+
+--- 12.	 Shows the customer’s full name, item(title) and quantity purchase, and its total value per item under InvoiceId 194
+SELECT Cust.FirstName, Cust.LastName,Inv.InvoiceDate, 
+       Albums.Title,Items.UnitPrice,Items.Quantity,
+       Items.UnitPrice*Items.Quantity as Total
+FROM chinook.invoice_items Items
+LEFT JOIN chinook.invoices Inv
+ON Inv.InvoiceId= Items.InvoiceId
+LEFT JOIN chinook.customers Cust
+ON Inv.CustomerId=Cust.CustomerId
+LEFT JOIN chinook.tracks Tracks
+ON Items.TrackId=Tracks.TrackId
+LEFT JOIN chinook.albums Albums
+ON Tracks.AlbumId=Albums.AlbumId
+WHERE Items.InvoiceId=194
