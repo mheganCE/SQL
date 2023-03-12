@@ -1,0 +1,54 @@
+/* in this SQL, I’m querying data of customers’ ordered grocery items for the year 2015 up to 2018
+
+— to view all available columns in the given table
+SELECT * FROM BIT_DB.grocery_sales_v1
+
+— to show total sales from 2015-2018
+SELECT order_year, sum(total_sales)FROM BIT_DB.grocery_sales_v1
+GROUP by order_year
+
+— Shows total and average profit per year
+SELECT order_year, sum(profit), avg(profit)FROM BIT_DB.grocery_sales_v1
+GROUP by order_year
+
+— top 5 customers based on their total sales for the year 2015
+SELECT customer_name, order_year, sum(total_sales)FROM BIT_DB.grocery_sales_v1
+WHERE order_year = "2015"
+GROUP by customer_name
+ORDER by sum(total_sales) desc limit 5
+
+— from which city or region has the highest combined sales from 2015-2018? Top 5 cities
+SELECT region, city, sum(total_sales)FROM BIT_DB.grocery_sales_v1
+GROUP by city
+ORDER by sum(total_sales) desc limit 5
+
+— quantified total profits from 2015-2018 by category and sub_category
+SELECT category, sub_category, sum(profit)FROM BIT_DB.grocery_sales_v1
+GROUP by category
+
+—ranked most saleable grocery items for the year 2016
+SELECT category, sub_category, sum(profit)FROM BIT_DB.grocery_sales_v1
+WHERE order_year = "2016"
+GROUP by category
+ORDER by sum(profit) desc limit 5
+
+— highest sales by month from 2015-2018
+SELECT month_name, sum(total_sales)FROM BIT_DB.grocery_sales_v1
+GROUP by month_name
+ORDER by sum(total_sales)desc limit 5
+
+— many orders were made from 2015-2018?
+SELECT count(order_id) FROM BIT_DB.grocery_sales_v1
+
+__ list of customers’ names
+SELECT customer_name FROM BIT_DB.grocery_sales_v1
+GROUP by customer_name
+
+— how many orders were made in January 2018?
+SELECT count(order_id) FROM BIT_DB.grocery_sales_v1
+WHERE month_name= "January" and order_year="2018"
+
+— how many beverages orders were made in December 2017?
+SELECT count(order_id) FROM BIT_DB.grocery_sales_v1
+WHERE month_name= "December" and order_year="2017" and category = "Beverages"
+GROUP by category
