@@ -1,0 +1,148 @@
+
+-- created EmployeesDemographics table (.csv) with column values -- 
+-- created EmployeesDemographics table in SQLiteStudio with column names and uploaded the EmployeesDemographics.CSV file --
+
+-- to show the EmployeesDemographics table data --
+SELECT * FROM EmployeesDemographics
+
+-- to update gender value of EmployeeID=1023 --
+UPDATE EmployeesDemographics
+SET Gender= 'Male'
+WHERE EmployeeID=1023
+
+-- to show the updated value of EmployeeID 1023 --
+SELECT * FROM EmployeesDemographics
+WHERE EmployeeID=1023
+
+-- to create new table_name EmployeeSalesMarketing with columns and datatypes --
+CREATE TABLE EmployeeSalesMarketing
+(EmployeeID Int,
+LastName VARCHAR,
+FirstName VARCHAR,
+Age Int,
+Gender VARCHAR)
+
+-- to insert or add column values in EmployeeSalesMarketing table --
+INSERT INTO EmployeeSalesMarketing VALUES
+(1014,'Wilson','John',25,'Male')
+(1016,'Thomas','Stephen',39,'Male')
+
+-- to insert or add column values to specific column in EmployeeSalesMarketing table --
+INSERT INTO EmployeeSalesMarketing (EmployeeID, FirstName) VALUES
+(1023,'David')
+
+-- to insert or add more values in EmployeeSalesMarketing table --
+INSERT INTO EmployeeSalesMarketing VALUES
+(1026,'Sanchez','Roy',37,'Male'),
+(1028,'Ramirez','Lily',25,'Female')
+(1031,'Walker','Sarah',41,'Female'),
+(1032,'Young','Elijah',35,'Male'),
+(1036,'Scott','Billy',54,'Female'),
+(1037,'Torres','Aurora',29,'Female'),
+(1039,'Hill','Alan',30,'Male'),
+(1041,'Green','Bruce',26,'Male'),
+(1042,'Adams','Bryan',27,'Male'),
+(1043,'Nelson','Robert',29,'Male'),
+(1045, 'Hall','Frily',40,'Female') 
+
+-- to show the EmployeeSalesMarketing table data with column values --
+SELECT * FROM EmployeeSalesMarketing
+
+-- to update values of EmployeeID=1023 --
+UPDATE EmployeeSalesMarketing
+SET 'LastName'= 'Brooke', Age= 40
+WHERE EmployeeID=1023
+
+-- to show the updated value of EmployeeID 1023 --
+SELECT * FROM EmployeeSalesMarketing
+WHERE EmployeeID=1023
+
+-- to quantifY total headcounts by Gender --
+SELECT Gender, Count(Gender) FROM EmployeesDemographics
+GROUP BY Gender
+
+-- created EmployeesSalary (.csv) with column values -- 
+-- created EmployeesSalary table with column names and uploaded the EmployeesSalary.CSV file to SQLite Studio --
+
+-- to show the EmployeesSalary table data --
+SELECT * FROM EmployeesSalary
+
+-- to show average salary per department excluding Top Management --
+SELECT Department, Count(Department)as TotalHeadcount , ROUND(AVG(Salary),2) as AVG_Sal FROM EmployeesSalary
+WHERE Department <> "Top Management"
+GROUP BY Department
+ORDEr BY AVG(Salary)DESC
+
+-- to match the EmployeesDemographics table with EmployeeSalesMarketing table --
+SELECT * FROM EmployeesDemographics as Demo
+    LEFT JOIN EmployeeSalesMarketing as SalesMrktg
+    ON Demo.EmployeeID=SalesMrktg.EmployeeID
+    
+-- to match the EmployeeSalesMarketing with EmployeesDemographics table  --
+SELECT * FROM EmployeesDemographics as Demo
+    RIGHT JOIN EmployeeSalesMarketing as SalesMrktg
+    ON Demo.EmployeeID=SalesMrktg.EmployeeID
+    
+-- to match two tables having exactly the same given conditions --
+SELECT * FROM EmployeesDemographics as Demo
+    INNER JOIN EmployeeSalesMarketing as SalesMrktg
+    ON Demo.EmployeeID=SalesMrktg.EmployeeID
+    
+-- to combine two tables with no NULL values in each columns --
+SELECT Demo.EmployeeID,SalesMrktg.LastName,Demo.'First Name',SalesMrktg.Age,Demo.Gender FROM EmployeesDemographics as Demo
+    INNER JOIN EmployeeSalesMarketing as SalesMrktg
+    ON Demo.EmployeeID=SalesMrktg.EmployeeID
+
+-- to show employees' headcount by department and gender --
+SELECT Department, Gender, Count(Gender) FROM EmployeesDemographics as Demo
+    FULL OUTER JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID=Sal.EmployeesID
+GROUP BY Department, Gender
+
+-- to show the salary of each employee by joining two tables: EmployeesDemographics table and EmployeesSalary table --
+SELECT * FROM EmployeesDemographics as Demo
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID=Sal.EmployeesID
+
+-- to update NULL value of EmployeeID=1035 --
+UPDATE EmployeesDemographics
+SET 'First Name'= 'Michael'
+WHERE EmployeeID=1035
+
+-- to show list of employees with their demographics and Salary plus updated value of EmployeeID=1035 --
+SELECT * FROM EmployeesDemographics as Demo
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID=Sal.EmployeesID
+    
+-- to show list of employees with their demographics and Salary without column duplication --
+SELECT Demo.EmployeeID,Demo.'Last Name',Demo.'First Name',Demo.Age,Sal.Designation,Sal.Department,Sal.Salary 
+FROM EmployeesDemographics as Demo
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID=Sal.EmployeesID
+ORDER BY Salary DESC
+
+-- to show list of employees having a salary more than 10000 --
+SELECT Demo.EmployeeID,Demo.'Last Name',Demo.'First Name',Demo.Age,Sal.Designation,Sal.Department,Sal.Salary 
+FROM EmployeesDemographics as Demo
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID=Sal.EmployeesID
+WHERE Salary > 10000
+ORDER BY Salary DESC
+
+-- to show two joined tables and adding a temporary column to identity the employees increase in percentage as per given conditions --
+SELECT Demo.EmployeeID,Demo.'Last Name',Demo.'First Name',Demo.Age,Sal.Designation,Sal.Department,Sal.Salary,
+    CASE WHEN Salary >= 20000 THEN 'No Increase'
+        WHEN Salary >= 10000 THEN '2.5% Increase'
+    ELSE '5% Increase' END as Remarks
+FROM EmployeesDemographics as Demo        
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID = Sal.EmployeesID
+
+-- to show the new salary for each employee under given conditions by adding a temporary column to the joined tables called NewSal --
+SELECT Demo.EmployeeID,Demo.'Last Name',Demo.'First Name',Demo.Age,Sal.Designation,Sal.Department,Sal.Salary,
+    CASE WHEN Salary >= 20000 THEN 'No Increase'
+        WHEN Salary >= 10000 THEN ROUND((Salary*1.025),0)
+    ELSE ROUND((Salary*1.05),0) END as NewSal
+FROM EmployeesDemographics as Demo        
+    JOIN EmployeesSalary as Sal
+    ON Demo.EmployeeID = Sal.EmployeesID
