@@ -1,0 +1,647 @@
+/*
+Description: The query displays customers first names, last names and email addresses.
+*/
+
+SELECT  
+    FirstName AS [Customer First Name], 
+    LastName AS 'Customer Last Name', 
+    Email AS EMAIL
+FROM 
+    Customer
+ORDER BY
+    FirstName ASC,
+    LastName DESC
+LIMIT 10
+
+/*
+Description: How many customers purchased two songs at $0.99 each?
+*/
+
+SELECT  
+    Count(CustomerID)
+FROM 
+    Invoice
+WHERE 
+    Total = 1.98
+    
+/* answer is 111 customers or you can use the below query */
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    Total = 1.98
+ORDER BY
+    InvoiceDate
+
+/*
+Description: How many invoices exist between $1.98 and $5.00?
+*/
+
+SELECT  
+    Count(InvoiceDate)
+FROM 
+    Invoice
+WHERE 
+    Total Between 1.98 and 5.00
+
+/* answer is 178 invoices or you can use the below query */
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    Total BETWEEN  1.98 AND 5.00
+ORDER BY
+    InvoiceDate
+
+/* answer is 178 invoices which was shown as Total rows loaded: 178 */
+
+/*
+Description: How many invoices that are exactlly $1.98 or $3.96?
+*/
+
+SELECT  
+    Count(InvoiceDate)
+FROM 
+    Invoice
+WHERE 
+    Total IN (1.98, 3.96)
+
+/* answer is 168 invoices or you can use the below query */
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    Total IN (1.98, 3.96)
+ORDER BY
+    InvoiceDate
+    
+/* answer is 168 invoices which was shown as Total rows loaded: 168 */
+
+/*
+Description: How many invoices were billed to Brussels?
+*/
+
+SELECT  
+    Count(BillingCity)
+FROM 
+    Invoice
+WHERE 
+    BillingCity = 'Brussels'
+
+/* answer is 7 invoices or you can use the below query */
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    BillingCity = 'Brussels'
+ORDER BY
+    InvoiceDate
+    
+/* answer is 7 invoices which was shown as Total rows loaded: 7 */
+
+/*
+Description: How many invoices were billed to Brussels, Orlando or Paris?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    BillingCity IN ('Brussels', 'Orlando', 'Paris')
+ORDER BY
+    InvoiceDate
+    
+/* answer is 28 invoices which was shown as Total rows loaded: 28 */
+
+/*
+Description: How many invoices were billed in cities that star with B?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    BillingCity LIKE 'B%'
+ORDER BY
+    InvoiceDate
+    
+/* answer is 62 invoices which was shown as Total rows loaded: 62 */
+
+/*
+Description: How many invoices were billed in cities have a B anywhere in it's name?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    BillingCity LIKE '%B%'
+ORDER BY
+    InvoiceDate
+    
+/* answer is 83 invoices which was shown as Total rows loaded: 83 */
+
+/*
+Description: How many invoices were billed on May 22, 2010?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    InvoiceDate = '2010-05-22 00:00:00'
+ORDER BY
+    InvoiceDate
+    
+/* answer is 1 invoices which was shown as Total rows loaded: 1 or using the DATE function*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    DATE(InvoiceDate) = '2010-05-22'
+ORDER BY
+    InvoiceDate
+
+/*
+Description: Get all invoices were billed after 2010-05-22 and have a total of less than 3.00?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    DATE(InvoiceDate) > '2010-05-22' AND Total < 3.00
+ORDER BY
+    InvoiceDate
+    
+/* answer is 124 invoices which was shown as Total rows loaded: 124 */
+
+/*
+Description: Get all invoiceswho's billing city starts with P or starts with D?
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    BillingCity LIKE 'P%' OR BillingCity LIKE 'D%'
+ORDER BY
+    InvoiceDate
+    
+/* answer is 56 invoices which was shown as Total rows loaded: 56 */
+
+/*
+Description: Get all invoices that are greater than 1.98 from any cities whose name start with P or starts with D?
+Note: PEMDAS or BEMDAS
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM 
+    Invoice
+WHERE 
+    Total>1.98 AND   
+    (BillingCity LIKE 'P%' OR BillingCity LIKE 'D%')     
+ORDER BY
+    InvoiceDate
+    
+/* answer is 35 invoices which was shown as Total rows loaded: 35 */
+
+/*
+Description: The goal is to get as many customers as possible to spend between $7.00 and $ 15.00
+Sales Categories:
+Baseline Purchase - between $.99 and $1.99
+Low Purchase - Between $2.00 and $6.99
+Target Purchase - Between $7.00 and $15.00
+Top Performer - Above $15.00 
+and showing all the Top Performer
+*/
+
+SELECT  
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,    
+    Total,
+    CASE
+        WHEN Total < 2.0 THEN 'Baseline Purchase'
+        WHEN Total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+        WHEN Total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+        ELSE 'Top Performer'
+    END AS PurchaseType
+FROM 
+    Invoice
+WHERE
+    PurchaseType='Top Performer'
+ORDER BY BillingCity
+
+/*
+Description: To get the total number of purchase per PurchaseType
+*/
+
+SELECT  
+    Count(Total),
+    CASE
+        WHEN Total < 2.0 THEN 'Baseline Purchase'
+        WHEN Total BETWEEN 2.00 AND 6.99 THEN 'Low Purchase'
+        WHEN Total BETWEEN 7.00 AND 15.00 THEN 'Target Purchase'
+        ELSE 'Top Performer'
+    END AS PurchaseType
+FROM 
+    Invoice
+GROUP BY PurchaseType
+ORDER BY Count(Total)
+
+/*
+Description: To show customers First and Last Names as well as their purchases or invoices by combining two separate tables using there related columns 
+*/
+
+SELECT
+    Cust.LastName,
+    Cust.FirstName,
+    Inv.InvoiceId,
+    Inv.CustomerId,
+    Inv.InvoiceDate,
+    Inv.Total
+FROM
+    Invoice as Inv
+INNER JOIN 
+    Customer as Cust
+ON 
+    Inv.CustomerId=Cust.CustomerId
+ORDER BY
+    Cust.CustomerId
+
+/*
+Description: To show the top 10 highest sales invoices with its corresponding customers' names and sales support agents' names.
+*/
+
+SELECT
+    Empl.FirstName,
+    Empl.LastName,
+    Empl.EmployeeId,
+    Cust.FirstName,
+    Cust.LastName,
+    Cust.CustomerId,
+    Inv.Total
+FROM
+    Invoice as Inv
+INNER JOIN 
+    Customer as Cust
+ON 
+    Inv.CustomerId=Cust.CustomerId
+INNER JOIN
+    Employee as Empl
+ON
+    Cust.SupportRepId=Empl.EmployeeId
+ORDER BY
+    Inv.Total DESC
+LIMIT 10
+
+/*
+Description: To get total sales of each Sales support agents and its ranking.
+*/
+
+SELECT
+    Empl.FirstName,
+    Empl.LastName,
+    Empl.EmployeeId,
+    Sum(Inv.Total)
+FROM
+    Invoice as Inv
+INNER JOIN 
+    Customer as Cust
+ON 
+    Inv.CustomerId=Cust.CustomerId
+INNER JOIN
+    Employee as Empl
+ON
+    Cust.SupportRepId=Empl.EmployeeId
+GROUP BY
+    Empl.FirstName
+ORDER BY
+    Sum(Inv.Total) DESC
+
+/*
+Description: Customers' mailing list by joining separate columns data fields into one and using different String Functions
+*/
+
+SELECT
+    FirstName,
+    LastName,
+    Address,
+    FirstName || ' ' ||LastName||' '|| Address||','|| '  ' ||City||' '||State||' '||PostalCode as 'Mailing Address',
+    LENGTH(PostalCode),
+    SUBSTR(PostalCode,1,5)as '5 Digit Postal Code',
+    UPPER(FirstName) as 'First Name All Caps',
+    LOWER(LastName) as 'Last Name All Lower'
+FROM
+    Customer
+WHERE
+    Country= 'USA'
+    
+
+/*
+Description: The goal is to calculate employees' ages
+*/
+
+SELECT
+    LastName,
+    FirstName,
+    BirthDate,
+    STRFTIME('%Y-%m-%d',BirthDate) as 'BirthDate No Timecode',
+    STRFTIME('%Y-%m-%d','now')-STRFTIME('%Y-%m-%d',BirthDate) as Age
+FROM
+    Employee
+    
+/*
+Description: To know the all time global sales, average sales, maximum and minimum sales and total quantity of sales
+*/
+
+SELECT
+   ROUND(SUM(Total),2) as 'Total Sales',
+   ROUND(AVG(Total),2) as 'Average Sales',
+   MAX(Total) as 'Maximum Sales',
+   MIN(Total) as 'Minimum Sales',
+   COUNT(*) as 'Sales Count'
+FROM
+    Invoice
+
+/*
+Description: To find the average invoice totals by city 
+*/
+
+SELECT
+    BillingCity,
+    ROUND(AVG(Total),2)
+FROM
+    Invoice
+GROUP BY
+    BillingCity
+ORDER BY
+    BillingCity
+    
+/*    
+Description: To find the average invoice totals by city for only cities that start with L
+*/
+
+SELECT
+    BillingCity,
+    ROUND(AVG(Total),2)
+FROM
+    Invoice
+WHERE
+    BillingCity LIKE'L%'
+GROUP BY
+    BillingCity
+ORDER BY
+    BillingCity
+
+/*    
+Description: To find the average invoice totals greater than $5.00 but only cities that starts with letter B
+*/
+
+SELECT
+    BillingCity,
+    ROUND(AVG(Total),2)
+FROM
+    Invoice
+WHERE
+    BillingCity LIKE 'B%'
+GROUP BY
+    BillingCity
+HAVING
+    AVG(Total)>5
+ORDER BY
+    BillingCity
+
+/*    
+Description: To find the average invoice totals by billing country and city
+*/
+
+SELECT
+    BillingCountry,
+    BillingCity,
+    ROUND(AVG(Total),2)
+FROM
+    Invoice
+GROUP BY
+    BillingCountry,
+    BillingCity
+ORDER BY
+    BillingCountry
+
+/*    
+Description: To gather data of all invoices that are lower than the total average using subquery
+*/
+
+SELECT
+    ROUND(AVG(Total),2) as AvgTotal
+FROM
+    Invoice
+    
+SELECT
+    InvoiceDate,
+    BillingAddress,
+    BillingCity,
+    Total
+FROM
+    Invoice
+WHERE
+    Total < 
+    (SELECT
+        ROUND(AVG(Total),2)
+     FROM
+         Invoice)
+ORDER BY
+    Total DESC
+    
+/*    
+Description: How is the individual city performance compare to the global average Sales?
+*/
+
+SELECT
+    BillingCity,
+    ROUND(AVG(Total),2) as CityAvg,
+    (SELECT
+        ROUND(AVG(Total),2)
+     FROM
+         Invoice )as AvgTotal
+FROM
+    Invoice
+GROUP BY
+    BillingCity
+ORDER BY
+    BillingCity
+
+/*    
+Description: List of invoices after January 9, 2012
+*/
+
+SELECT
+    InvoiceDate,
+    BillingAddress,
+    BillingCity
+FROM
+    Invoice
+WHERE
+    InvoiceDate >
+    (SELECT
+        InvoiceDate
+    FROM
+        Invoice
+    WHERE
+        InvoiceId=251)
+ORDER BY
+    InvoiceDate
+
+/*    
+Description: List of invoices within the selected three dates
+*/
+
+SELECT
+    InvoiceDate,
+    BillingAddress,
+    BillingCity
+FROM
+    Invoice
+WHERE
+    InvoiceDate IN
+    (SELECT
+        InvoiceDate
+    FROM
+        Invoice
+    WHERE
+        InvoiceId IN (251,252,254))
+
+/*    
+Description: Which tracts not selling?
+*/
+
+SELECT
+    TrackId,
+    Composer,
+    Name
+FROM
+    Track
+WHERE
+    TrackId
+NOT IN
+(SELECT
+    DISTINCT
+    TrackId
+FROM
+    InvoiceLine
+ORDER BY
+    TrackId)
+
+/*    
+Description: creating View
+*/
+
+CREATE VIEW V_AvgTotal AS
+SELECT
+    ROUND(AVG(Total),2)as AvgTotal
+FROM
+    Invoice
+
+/*    
+Description: Creating a VIEW to see what track,what prices and what invoices by joining two separate tables
+*/
+
+CREATE VIEW V_Tracks_InvL AS
+SELECT
+    InvL.InvoiceId,
+    InvL.UnitPrice,
+    InvL.Quantity,
+    T.Name,
+    T.Composer,
+    T.Milliseconds
+FROM
+    InvoiceLine as InvL
+INNER JOIN
+    Track as T
+ON
+    InvL.TrackId=T.TrackId
+
+DROP VIEW
+    V_AvgTotal
+    
+/*    
+Description: Inserting new data in the Artist table
+*/
+
+INSERT INTO
+    Artist (Name)
+VALUES ('Bob Marley')
+
+/*    
+Description: editing data in the Artist table
+*/
+
+UPDATE
+    Artist
+SET
+    Name='Damien Marley'
+WHERE
+    ArtistId=276
+    
+/*    
+Description: deleting in the Artist table
+*/
+
+DELETE FROM
+    Artist
+WHERE
+    ArtistId=276
